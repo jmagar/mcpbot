@@ -2,7 +2,9 @@ import 'dotenv/config';
 import express, { Request, Response, RequestHandler } from 'express';
 import cors from 'cors';
 import path from 'path';
-import { ChatSession, ModelKey, MODELS } from './chat';
+import { MODELS, ModelKey } from '../core/ai.js';
+import { ChatSession } from './chat.js';
+import { WORKSPACE_DIR } from '../core/config.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,7 +12,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(process.cwd(), 'src/client')));
+app.use(express.static(path.join(WORKSPACE_DIR, 'src/client')));
 
 // Store chat sessions
 const sessions: Map<string, ChatSession> = new Map();
@@ -82,4 +84,4 @@ app.post('/api/chat/:sessionId/switch', ((req: Request<ChatParams, unknown, Mode
 // Start server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
-}); 
+});

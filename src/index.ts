@@ -1,49 +1,7 @@
 import 'dotenv/config';
-import { genkit } from 'genkit';
-import { mcpClient } from 'genkitx-mcp';
-import { googleAI, gemini15Pro } from '@genkit-ai/googleai';
-import { anthropic } from 'genkitx-anthropic';
 import { createInterface } from 'node:readline/promises';
-import path from 'path';
-
-// Get the absolute path to the workspace
-const WORKSPACE_DIR = process.cwd();
-
-// Initialize Genkit with all our plugins
-const ai = genkit({
-  plugins: [
-    // MCP plugin for filesystem access
-    mcpClient({
-      name: 'filesystem',
-      serverProcess: {
-        command: 'npx',
-        args: [
-          '@modelcontextprotocol/server-filesystem',
-          WORKSPACE_DIR,
-        ],
-      },
-    }),
-    // Google AI plugin for Gemini models
-    googleAI(),
-    // Anthropic plugin for Claude models
-    anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-    }),
-  ],
-});
-
-// Available models
-const MODELS = {
-  gemini: gemini15Pro,
-  claude: 'anthropic/claude-3-opus-20240229',
-} as const;
-
-type ModelKey = keyof typeof MODELS;
-
-// Function to get the current model name
-function getCurrentModel(modelKey: ModelKey) {
-  return `Using ${modelKey} model`;
-}
+import { ai, MODELS, ModelKey, getCurrentModel } from './core/ai.js';
+import { WORKSPACE_DIR } from './core/config.js';
 
 async function startChat() {
   const readline = createInterface({
