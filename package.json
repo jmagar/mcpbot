@@ -1,0 +1,65 @@
+{
+  "name": "mcp-bot",
+  "version": "1.0.0",
+  "description": "A chatbot using Genkit with MCP plugin and multiple model support",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/server/index.ts",
+    "dev": "tsx watch src/server/index.ts",
+    "debug": "tsx --inspect-brk src/server/index.ts",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmagar/mcpbot.git"
+  },
+  "keywords": [
+    "genkit",
+    "mcp",
+    "chatbot",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmagar/mcpbot/issues"
+  },
+  "homepage": "https://github.com/jmagar/mcpbot#readme",
+  "dependencies": {
+    "@genkit-ai/googleai": "^0.9.12",
+    "@modelcontextprotocol/server-brave-search": "^0.6.2",
+    "@modelcontextprotocol/server-everything": "^0.6.2",
+    "@modelcontextprotocol/server-filesystem": "^0.6.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "genkit": "^0.9.12",
+    "genkitx-anthropic": "^0.11.1",
+    "genkitx-mcp": "^0.9.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.4.2",
+    "rimraf": "^5.0.10",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
