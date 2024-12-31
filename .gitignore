@@ -43,3 +43,10 @@ replay_pid*
 ### Logs ###
 logs/
 *.log
+bin/
+build/
+.vscode/
+.idea/
+*.iml
+.gradle/
+out/
