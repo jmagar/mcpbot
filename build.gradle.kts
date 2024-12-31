@@ -1,9 +1,14 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     application
+}
+
+kotlin {
+    jvmToolchain(21)
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+    }
 }
 
 repositories {
@@ -15,9 +20,9 @@ repositories {
 }
 
 dependencies {
-    implementation("io.modelcontextprotocol:kotlin-sdk:0.1.0")
+    implementation("io.modelcontextprotocol:kotlin-sdk:0.2.0")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
-    implementation("com.aallam.openai:openai-client:3.7.0")
+    implementation("com.aallam.openai:openai-client:3.8.0")
     
     // Ktor dependencies
     implementation(libs.ktor.server.core)
@@ -46,6 +51,18 @@ kotlin {
     jvmToolchain(21)
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "21"
+    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
